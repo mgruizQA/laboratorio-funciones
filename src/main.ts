@@ -1,6 +1,10 @@
 /*---------------------------------------RESETEAR TURNO---------------------------------------------------*/
 function resetNumero() {
-  (document.getElementById("numeroTurno") as HTMLInputElement).innerHTML = "00";
+  const numeroTurno = document.getElementById("numeroTurno");
+
+  if (numeroTurno instanceof HTMLElement) {
+    numeroTurno.innerHTML = "00";
+  }
 }
 
 const btnReset = document.getElementById("btn-reset");
@@ -10,31 +14,45 @@ if (btnReset !== null && btnReset !== undefined) {
 
 /*---------------------------------------INTRODUCIR TURNO---------------------------------------------------*/
 function introduceTurno() {
-  const numeroManual = (document.getElementById("turno") as HTMLInputElement)
-    .value;
+  const numeroManual = document.getElementById("turno");
+  if (numeroManual instanceof HTMLInputElement) {
+    const valorInput = numeroManual.value;
+    let valorInputInt = parseInt(valorInput);
 
-  if (isNaN(parseInt(numeroManual))) {
+    if (!isNaN(valorInputInt)) {
+      let numeroTurno = document.getElementById("numeroTurno");
+
+      if (numeroTurno instanceof HTMLElement) {
+        numeroTurno.innerHTML = valorInput.padStart(2, "0");
+      }
+    } else {
+      window.alert("Introduce un numero");
+    }
+  }
+}
+
+/*if (isNaN(formatoNumero)) {
     window.alert("Introduce un numero");
   } else {
     (document.getElementById("numeroTurno") as HTMLInputElement).innerHTML =
       numeroManual.padStart(2, "0");
-  }
-}
-const btnCambiar = document.getElementById("btn-cambiar") as HTMLInputElement;
-btnCambiar.addEventListener("click", introduceTurno);
+  }*/
 
+const btnCambiar = document.getElementById("btn-cambiar");
+if (btnCambiar !== null && btnCambiar !== undefined) {
+  btnCambiar.addEventListener("click", introduceTurno);
+}
 /*---------------------------------------SIGUIENTE NUMERO---------------------------------------------------*/
 function numeroSiguiente() {
-  const numeroMarcador = (
-    document.getElementById("numeroTurno") as HTMLInputElement
-  ).innerHTML;
+  const numeroMarcador = document.getElementById("numeroTurno");
 
-  const numeroActualFormateado = parseInt(numeroMarcador);
-  const numeroSiguiente = numeroActualFormateado + 1;
-  const numeroString = numeroSiguiente.toString().padStart(2, "0");
-
-  (document.getElementById("numeroTurno") as HTMLInputElement).innerHTML =
-    numeroString;
+  if (numeroMarcador instanceof HTMLElement) {
+    const valor = numeroMarcador.innerHTML;
+    const numeroActualFormateado = parseInt(valor);
+    const numeroSiguiente = numeroActualFormateado + 1;
+    let numeroString = numeroSiguiente.toString().padStart(2, "0");
+    numeroMarcador.innerHTML = numeroString;
+  }
 }
 
 const btnSiguiente = document.getElementById("btn-siguiente");
@@ -44,20 +62,19 @@ if (btnSiguiente !== null && btnSiguiente !== undefined) {
 
 /*---------------------------------------NUMERO ANTERIOR---------------------------------------------------*/
 function numeroAnterior() {
-  const numeroMarcador = (
-    document.getElementById("numeroTurno") as HTMLInputElement
-  ).innerHTML;
+  const numeroMarcador = document.getElementById("numeroTurno");
 
-  const numeroActualFormateado = parseInt(numeroMarcador);
-  const numeroAnterior = numeroActualFormateado - 1;
+  if (numeroMarcador instanceof HTMLElement) {
+    const valor = numeroMarcador.innerHTML;
+    const numeroActualFormateado = parseInt(valor);
+    const numeroAnterior = numeroActualFormateado - 1;
+    let numeroString = numeroAnterior.toString().padStart(2, "0");
 
-  if (numeroAnterior > 0) {
-    const numeroString = numeroAnterior.toString().padStart(2, "0");
-
-    (document.getElementById("numeroTurno") as HTMLInputElement).innerHTML =
-      numeroString;
-  } else {
-    resetNumero();
+    if (numeroAnterior > 0) {
+      numeroMarcador.innerHTML = numeroString;
+    } else {
+      resetNumero();
+    }
   }
 }
 
