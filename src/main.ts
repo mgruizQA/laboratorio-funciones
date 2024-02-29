@@ -31,13 +31,6 @@ function introduceTurno() {
   }
 }
 
-/*if (isNaN(formatoNumero)) {
-    window.alert("Introduce un numero");
-  } else {
-    (document.getElementById("numeroTurno") as HTMLInputElement).innerHTML =
-      numeroManual.padStart(2, "0");
-  }*/
-
 const btnCambiar = document.getElementById("btn-cambiar");
 if (btnCambiar !== null && btnCambiar !== undefined) {
   btnCambiar.addEventListener("click", introduceTurno);
